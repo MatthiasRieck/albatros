@@ -1,4 +1,4 @@
-from .core import AlbatrosException, ConsistencyCheckable, assert_that
+from .core import AlbatrosError, ConsistencyCheckable, assert_that
 
 
 _INF = float('inf')
@@ -14,15 +14,15 @@ class Bounded(ConsistencyCheckable):
     def check_consistency(self):
         assert_that(
             self.lower_bound <= self.upper_bound,
-            AlbatrosException(f'Lower bound "{self.lower_bound}" is higher than upper bound "{self.upper_bound}"!')
+            AlbatrosError(f'Lower bound "{self.lower_bound}" is higher than upper bound "{self.upper_bound}"!')
         )
         assert_that(
             self.upper_bound != -_INF,
-            AlbatrosException('Upper bound must not be equal to minus infinity!'),
+            AlbatrosError('Upper bound must not be equal to minus infinity!'),
         )
         assert_that(
             self.lower_bound != _INF,
-            AlbatrosException('Lower bound must not be equal to infinity!'),
+            AlbatrosError('Lower bound must not be equal to infinity!'),
         )
 
 
@@ -36,11 +36,11 @@ class Scaled(ConsistencyCheckable):
     def check_consistency(self):
         assert_that(
             self.scaling != 0.,
-            AlbatrosException('Scaling must not be equal to zero!'),
+            AlbatrosError('Scaling must not be equal to zero!'),
         )
         assert_that(
             self.offset != _INF and self.offset != -_INF,
-            AlbatrosException('Offset must not be equal to infinity!')
+            AlbatrosError('Offset must not be equal to infinity!')
         )
 
 
@@ -53,7 +53,7 @@ class Named(ConsistencyCheckable):
     def check_consistency(self):
         assert_that(
             self.name.isidentifier(),
-            AlbatrosException(f'Name "{self.name}" does not fullfil the isidentifier requirements!')
+            AlbatrosError(f'Name "{self.name}" does not fullfil the isidentifier requirements!')
         )
 
 

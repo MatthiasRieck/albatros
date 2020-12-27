@@ -1,4 +1,4 @@
-class AlbatrosException(Exception):
+class AlbatrosError(Exception):
     """General exception used in albatros python"""
 
 

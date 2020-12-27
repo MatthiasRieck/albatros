@@ -1,11 +1,11 @@
 from unittest import TestCase
 
-from albatros.core.core import AlbatrosException, assert_that, ConsistencyCheckable
+from albatros.core.core import AlbatrosError, assert_that, ConsistencyCheckable
 
 
-class TestAlbatrosException(TestCase):
+class TestAlbatrosError(TestCase):
     def test_instance(self):
-        self.assertIsInstance(AlbatrosException(), Exception)
+        self.assertIsInstance(AlbatrosError(), Exception)
 
 
 class TestAssertThat(TestCase):

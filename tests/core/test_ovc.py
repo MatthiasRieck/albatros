@@ -2,7 +2,7 @@ from unittest import TestCase
 
 from albatros.core.ovc import Bounded, Scaled, Named, _NamedScaledBounded, Cost
 from albatros.core.ovc import State, Control, Parameter, Constraint
-from albatros.core.core import AlbatrosException
+from albatros.core.core import AlbatrosError
 
 
 _INF = float('inf')
@@ -20,7 +20,7 @@ class TestBounded(TestCase):
     def test_check_consistency_bounds(self):
         bounded = Bounded(2, 1)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             bounded.check_consistency()
 
         self.assertEqual(
@@ -31,7 +31,7 @@ class TestBounded(TestCase):
     def test_check_consistency_wrong_inf(self):
         b_lower = Bounded(lower_bound=_INF)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             b_lower.check_consistency()
 
         self.assertEqual(
@@ -41,7 +41,7 @@ class TestBounded(TestCase):
 
         b_upper = Bounded(upper_bound=-_INF)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             b_upper.check_consistency()
 
         self.assertEqual(
@@ -62,7 +62,7 @@ class TestScaled(TestCase):
     def test_check_consistency_scaling(self):
         s_scaling = Scaled(scaling=0)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             s_scaling.check_consistency()
 
         self.assertEqual(
@@ -73,7 +73,7 @@ class TestScaled(TestCase):
     def test_check_consistency_offset_inf(self):
         s_offset_inf = Scaled(offset=_INF)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             s_offset_inf.check_consistency()
 
         self.assertEqual(
@@ -83,7 +83,7 @@ class TestScaled(TestCase):
 
         s_offset_m_inf = Scaled(offset=-_INF)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             s_offset_m_inf.check_consistency()
 
         self.assertEqual(
@@ -103,7 +103,7 @@ class TestNamed(TestCase):
     def test_invalid_name_blank(self):
         value = Named('var name')
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
@@ -114,7 +114,7 @@ class TestNamed(TestCase):
     def test_invalid_name_number(self):
         value = Named('2')
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
@@ -125,7 +125,7 @@ class TestNamed(TestCase):
     def test_invalid_name_empty(self):
         value = Named('')
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
@@ -146,7 +146,7 @@ class Test_NamedScaledBounded(TestCase):
     def test_bounds(self):
         value = _NamedScaledBounded('varname', lower_bound=2, upper_bound=1)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
@@ -157,7 +157,7 @@ class Test_NamedScaledBounded(TestCase):
     def test_scaling(self):
         value = _NamedScaledBounded('varname', scaling=0)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
@@ -168,7 +168,7 @@ class Test_NamedScaledBounded(TestCase):
     def test_invalid_name_blank(self):
         value = _NamedScaledBounded('var name')
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
@@ -193,7 +193,7 @@ class TestCost(TestCase):
     def test_scaling(self):
         value = Cost('varname', scaling=0)
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
@@ -204,7 +204,7 @@ class TestCost(TestCase):
     def test_invalid_name_blank(self):
         value = Cost('var name')
 
-        with self.assertRaises(AlbatrosException) as ctx:
+        with self.assertRaises(AlbatrosError) as ctx:
             value.check_consistency()
 
         self.assertEqual(
