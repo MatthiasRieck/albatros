@@ -1,7 +1,7 @@
 from unittest import TestCase
 
-from albatros.core.ovc import Bounded, Scaled, Named, _NamedScaledBounded, Cost
-from albatros.core.ovc import State, Control, Parameter, Constraint
+from albatros.core.descriptors import Bounded, Scaled, Named, _NamedScaledBounded, Cost
+from albatros.core.descriptors import State, Control, Parameter, Constraint
 from albatros.core.core import AlbatrosError
 
 

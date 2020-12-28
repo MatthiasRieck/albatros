@@ -82,6 +82,8 @@ class Control(_NamedScaledBounded):
 class Parameter(_NamedScaledBounded):
     """Parameter optimization variable"""
 
+# TODO: Needs Constant Optimization Value
+
 
 class Constraint(_NamedScaledBounded):
     """Constraint optimization variable"""
