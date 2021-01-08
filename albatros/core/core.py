@@ -16,11 +16,3 @@ def assert_that(condition, exception):
 
     if not condition:
         raise exception
-
-
-class ConsistencyCheckable:
-    """Class that implements a check_consistency method"""
-
-    def check_consistency(self):
-        """Implementations of these method shall raise Exceptions/Errors"""
-        raise NotImplementedError

@@ -4,6 +4,7 @@ from .bounded import Bounded
 from .fixable import Fixable
 
 from albatros.core import assert_that, AlbatrosError
+from albatros.core.utils import get_initial_guess
 
 import numpy as np
 
@@ -39,11 +40,6 @@ class Parameter(Named, Scaled, Bounded, Fixable):
             )
 
         if not self.is_fixed:
-            #     assert_that(
-            #         not np.isnan(self.value) and not np.isinf(self.value),
-            #         AlbatrosError(f'Fixed parameter "{self.name}" has invalid value "{self.value}"!'),
-            #     )
-            # else:
             assert_that(
                 self.value >= self.lower_bound,
                 AlbatrosError(
@@ -64,14 +60,7 @@ class Parameter(Named, Scaled, Bounded, Fixable):
         if not np.isnan(self.value):
             return
 
-        bound_values = []
-        if not np.isinf(self.lower_bound):
-            bound_values.append(self.lower_bound)
-
-        if not np.isinf(self.upper_bound):
-            bound_values.append(self.upper_bound)
-
-        if len(bound_values) > 0:
-            self.value = np.mean(bound_values)
-        else:
+        try:
+            self.value = get_initial_guess(self.lower_bound, self.upper_bound)
+        except AlbatrosError:
             raise AlbatrosError(f'The initial guess for parameter "{self.name}" cannot automatically generated!')
