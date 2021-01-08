@@ -1,6 +1,6 @@
 from unittest import TestCase
 
-from albatros.core.core import AlbatrosError, assert_that, ConsistencyCheckable
+from albatros.core.core import AlbatrosError, assert_that
 
 
 class TestAlbatrosError(TestCase):
@@ -15,9 +15,3 @@ class TestAssertThat(TestCase):
     def test_condition_false(self):
         with self.assertRaises(Exception):
             assert_that(False, Exception('dummy exception'))
-
-
-class TestConsitencyCheckable(TestCase):
-    def test_raises_not_implemented(self):
-        with self.assertRaises(NotImplementedError):
-            ConsistencyCheckable().check_consistency()
