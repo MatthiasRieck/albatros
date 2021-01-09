@@ -1,3 +1,6 @@
+import numpy as np
+
+
 def repack_slices(slices):
     """Repacks the slices of the model evaluate execution"""
 
@@ -13,8 +16,10 @@ def repack_slices(slices):
 
 class Model:
     """Executes the model dynamics step function"""
-    def __init__(self, step_fun):
+    def __init__(self, step_fun, jac_sparsity=None):
+        # TODO: make jac sparsity optional
         self.step_fun = step_fun
+        self.jac_sparsity = np.array(jac_sparsity, dtype=bool)
 
     def evaluate(self, *args):
         out_slices = []
