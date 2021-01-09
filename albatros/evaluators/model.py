@@ -16,8 +16,8 @@ def repack_slices(slices):
 
 class Model:
     """Executes the model dynamics step function"""
-    def __init__(self, step_fun, jac_sparsity=None):
-        # TODO: make jac sparsity optional
+    def __init__(self, step_fun, states, jac_sparsity=None):
+        self.states = states
         self.step_fun = step_fun
         self.jac_sparsity = np.array(jac_sparsity, dtype=bool)
 

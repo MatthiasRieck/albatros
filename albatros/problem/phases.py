@@ -5,12 +5,11 @@ from albatros.discretization.utils import interpolation_indices
 class Phase:
     """Defines an Optimization Phase"""
 
-    def __init__(self, model, states, tau):
+    def __init__(self, model, tau):
         self.model = model
-        self.states = states
         self.tau = tau
-        self.state_grid = StateGrid(states, tau)
-        state_derivatives = list(map(lambda x: x.derivative, states))
+        self.state_grid = StateGrid(self.model.states, tau)
+        state_derivatives = list(map(lambda x: x.derivative, self.model.states))
         self.state_derivative_grid = StateDerivativeGrid(state_derivatives, tau)
         self.control_grids = []
         # self.output_grid = None

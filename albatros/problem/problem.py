@@ -26,8 +26,8 @@ class Problem:
     def append_phase(self, phase):
         self.phases.append(phase)
 
-    def add_phase(self, model, states, tau):
-        phase = Phase(model, states, tau)
+    def add_phase(self, model, tau):
+        phase = Phase(model, tau)
         self.append_phase(phase)
         return phase
 

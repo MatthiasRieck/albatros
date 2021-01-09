@@ -1,6 +1,7 @@
 from unittest import TestCase
 
 from albatros.evaluators.model import repack_slices, Model
+from albatros import State
 
 
 class TestRepackSlices(TestCase):
@@ -15,6 +16,7 @@ class TestRepackSlices(TestCase):
 
 class TestModel(TestCase):
     def test_evaluate(self):
-        model = Model(lambda x, u: (x*u,))
+        states = [State('x')]
+        model = Model(lambda x, u: (x*u,), states)
         values, = model.evaluate([1, 2, 3], [1, 2, 3])
         self.assertEqual(values, [1, 4, 9])

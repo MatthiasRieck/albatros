@@ -39,8 +39,8 @@ def test_brachistochrone(num_ts=301, x_fb=5, y_fb=4):
     problem = alba.Problem('brachistrochone')
     tau = np.linspace(0, 1, num_ts)
 
-    model = alba.Model(model_dynamics, jac_sparsity=[[0, 0, 1, 1], [0, 0, 1, 1], [0, 0, 0, 1]])
-    phase = problem.add_phase(model, states, tau)
+    model = alba.Model(model_dynamics, states, jac_sparsity=[[0, 0, 1, 1], [0, 0, 1, 1], [0, 0, 0, 1]])
+    phase = problem.add_phase(model, tau)
     phase.add_controls(controls)
     phase.start_time = alba.Parameter('start_time', 0, is_fixed=True)
     phase.final_time = t_final

@@ -41,8 +41,8 @@ def model_dynamics(states, controls):
 problem = alba.Problem('brachistrochone')
 tau = np.linspace(0, 1, 1001)
 
-model = alba.Model(model_dynamics, jac_sparsity=[[0, 0, 1, 1], [0, 0, 1, 1], [0, 0, 0, 1]])
-phase = problem.add_phase(model, states, tau)
+model = alba.Model(model_dynamics, states, jac_sparsity=[[0, 0, 1, 1], [0, 0, 1, 1], [0, 0, 0, 1]])
+phase = problem.add_phase(model, tau)
 control_grid = phase.add_controls(controls)
 phase.start_time = alba.Parameter('start_time', 0, is_fixed=True)
 phase.final_time = t_final
