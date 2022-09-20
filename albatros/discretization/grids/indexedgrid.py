@@ -2,8 +2,19 @@ from .basegrid import BaseGrid
 from albatros.core.utils import get_initial_guess
 
 import numpy as np
+from numba import jitclass
+from numba import int32, float32    # import the types
 
 
+spec = [
+    ('indices', int32),               # a simple scalar field
+    ('scaling_vec', float32[:]),          # an array field
+    ('scalings', float32[:]),          # an array field
+    ('offset_vec', float32[:]),          # an array field
+    ('offsets', float32[:]),          # an array field
+]
+
+@jitclass(spec)
 class IndexedGrid(BaseGrid):
     """Container that holds a time of an optimization value"""
 

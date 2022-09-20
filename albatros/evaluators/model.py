@@ -1,3 +1,5 @@
+from albatros.discretization.grids import StateGrid
+
 import numpy as np
 
 
